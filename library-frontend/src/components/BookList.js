@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../api';
 import './BookList.css';  // Import the CSS file
+import BookForm from './BookForm'; // Import the BookForm component
 
 const BookList = () => {
     const [books, setBooks] = useState([]);
@@ -24,12 +25,17 @@ const BookList = () => {
         fetchBooks();
     }, []);
 
+    const handleBookAdded = (newBook) => {
+        setBooks((prevBooks) => [...prevBooks, newBook]);
+    };
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
     return (
         <div>
             <h1>My Books</h1>
+            <BookForm onBookAdded={handleBookAdded} /> {/* Include the form */}
             <table>
                 <thead>
                     <tr>
