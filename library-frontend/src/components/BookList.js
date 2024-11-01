@@ -33,30 +33,30 @@ const BookList = () => {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
-            <h1>My Books</h1>
-            <BookForm onBookAdded={handleBookAdded} /> {/* Include the form */}
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Description</th>
+        <div className="book-list-container">
+        <h1>My Books</h1>
+        <BookForm onBookAdded={handleBookAdded} />
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {books.map(book => (
+                    <tr key={book.id}>
+                        <td>{book.id}</td>
+                        <td>{book.title}</td>
+                        <td>{book.author}</td>
+                        <td>{book.description}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {books.map(book => (
-                        <tr key={book.id}>
-                            <td>{book.id}</td>
-                            <td>{book.title}</td>
-                            <td>{book.author}</td>
-                            <td>{book.description}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                ))}
+            </tbody>
+        </table>
+    </div>
     );
 };
 
