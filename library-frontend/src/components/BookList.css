@@ -1,0 +1,26 @@
+/* src/components/BookList.css */
+body{
+    background-color: beige;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid teal;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: teal;
+}
+
+.book-list-container {
+    padding-left: 20px; /* Adjust the value as needed */
+    padding-right: 20px; 
+    
+}
