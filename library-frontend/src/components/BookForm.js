@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../api';
+import './BookForm.css'; // Import your styles
 
 const BookForm = ({ onBookAdded }) => {
     const [title, setTitle] = useState('');
@@ -29,10 +30,10 @@ const BookForm = ({ onBookAdded }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className="book-form-container">
             <h2>Add a New Book</h2>
-            {error && <p>{error}</p>}
-            <div>
+            {error && <p className="error-message">{error}</p>}
+            <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                 <input
                     type="text"
@@ -40,8 +41,6 @@ const BookForm = ({ onBookAdded }) => {
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
-            </div>
-            <div>
                 <label>Author:</label>
                 <input
                     type="text"
@@ -49,17 +48,15 @@ const BookForm = ({ onBookAdded }) => {
                     onChange={(e) => setAuthor(e.target.value)}
                     required
                 />
-            </div>
-            <div>
                 <label>Description:</label>
                 <input
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-            </div>
-            <button type="submit">Add Book</button>
-        </form>
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
     );
 };
 
