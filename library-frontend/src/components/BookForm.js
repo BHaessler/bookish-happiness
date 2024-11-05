@@ -1,32 +1,48 @@
-// src/components/BookForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_BASE_URL } from '../api';
-import './BookForm.css'; // Import your styles
+import { API_BASE_URL } from '../api'; // Make sure this points to the correct base URL
+import './BookForm.css';
 
 const BookForm = ({ onBookAdded }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
-    const [genre, setGenre] = useState('');  // New state for genre
+    const [genre, setGenre] = useState('');
+    const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
 
+    // Fetch authors when the component mounts
+    useEffect(() => {
+        const fetchAuthors = async () => {
+            try {
+                const response = await axios.get(`${API_BASE_URL}/api/authors/`);
+                setAuthors(response.data); // Set authors to the state
+            } catch (error) {
+                console.error('Error fetching authors:', error);
+                setError('Error fetching authors');
+            }
+        };
+
+        fetchAuthors();
+    }, []);
+
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/books/`, {
+            const response = await axios.post(`${API_BASE_URL}/api/books/`, {
                 title,
-                author,
+                author: author,  // Send the author's ID
                 description,
-                genre,  // Include genre when sending the data
+                genre,  // Send the genre as a string
             });
-            onBookAdded(response.data); // Notify parent component
+            onBookAdded(response.data);  // Notify parent component
             setTitle('');
             setAuthor('');
             setDescription('');
-            setGenre('');  // Reset genre field
+            setGenre('');
         } catch (error) {
             setError('Error adding book');
         }
@@ -44,25 +60,42 @@ const BookForm = ({ onBookAdded }) => {
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
+                
                 <label>Author:</label>
-                <input
-                    type="text"
+                <select
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
                     required
-                />
+                >
+                    <option value="">Select Author</option>
+                    {authors.map((author) => (
+                        <option key={author.id} value={author.id}>
+                            {author.name}
+                        </option>
+                    ))}
+                </select>
+
                 <label>Description:</label>
-                <input
-                    type="text"
+                <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <label>Genre:</label>  {/* New genre input */}
-                <input
-                    type="text"
+
+                <label>Genre:</label>
+                <select
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
-                />
+                    required
+                >
+                    <option value="">Select Genre</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non_fiction">Non-Fiction</option>
+                    <option value="sci_fi">Sci-Fi</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="biography">Biography</option>
+                    <option value="mystery">Mystery</option>
+                </select>
+
                 <button type="submit">Add Book</button>
             </form>
         </div>
