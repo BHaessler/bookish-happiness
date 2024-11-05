@@ -8,6 +8,7 @@ const BookForm = ({ onBookAdded }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
+    const [genre, setGenre] = useState('');  // New state for genre
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
@@ -19,11 +20,13 @@ const BookForm = ({ onBookAdded }) => {
                 title,
                 author,
                 description,
+                genre,  // Include genre when sending the data
             });
             onBookAdded(response.data); // Notify parent component
             setTitle('');
             setAuthor('');
             setDescription('');
+            setGenre('');  // Reset genre field
         } catch (error) {
             setError('Error adding book');
         }
@@ -53,6 +56,12 @@ const BookForm = ({ onBookAdded }) => {
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                />
+                <label>Genre:</label>  {/* New genre input */}
+                <input
+                    type="text"
+                    value={genre}
+                    onChange={(e) => setGenre(e.target.value)}
                 />
                 <button type="submit">Add Book</button>
             </form>
