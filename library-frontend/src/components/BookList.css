@@ -1,26 +1,29 @@
 /* src/components/BookList.css */
-body{
+body {
     background-color: beige;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    border: 1px solid teal;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: teal;
 }
 
 .book-list-container {
     padding-left: 20px; /* Adjust the value as needed */
-    padding-right: 20px; 
-    
+    padding-right: 20px;
+}
+
+.table {
+    width: 100%; /* Ensures the table takes full width */
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.table th, .table td {
+    border: 1px solid teal; /* Your custom border color */
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: teal !important; /* Your custom header background color */
+    color: white !important; /* Header text color for contrast */}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2; /* Optional: Zebra striping */
 }

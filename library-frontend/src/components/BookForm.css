@@ -1,0 +1,39 @@
+/* src/components/BookForm.css */
+.book-form-container {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 500px; /* Limit form width */
+    margin: 20px auto; /* Center the form on the page */
+}
+
+h2 {
+    color: teal; /* Custom header color */
+}
+
+label {
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Make labels block elements for better spacing */
+}
+
+input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the input */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid teal; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+button {
+    background-color: teal; /* Button color */
+    color: white; /* Text color */
+    padding: 10px 15px; /* Button padding */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+}
+
+button:hover {
+    background-color: darkcyan; /* Darker shade on hover */
+}
